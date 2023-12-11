@@ -382,6 +382,7 @@ class ChromeDriverManager(WebDriverManagerBase):
     """
 
     chrome_driver_base_url = 'https://googlechromelabs.github.io/chrome-for-testing/last-known-good-versions-with-downloads.json'
+    chrome_driver_base_url2 = 'https://googlechromelabs.github.io/chrome-for-testing/known-good-versions-with-downloads.json'
 
     def _get_latest_version_number(self):
         resp = requests.get(self.chrome_driver_base_url)
