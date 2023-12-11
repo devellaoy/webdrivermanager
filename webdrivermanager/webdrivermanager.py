@@ -421,8 +421,11 @@ class ChromeDriverManager(WebDriverManagerBase):
 
         LOGGER.debug('Detected OS: %sbit %s', self.bitness, self.os_name)
 
-        chrome_driver_objects = requests.get(self.chrome_driver_base_url).json()
-        chromedriver_list = chrome_driver_objects['channels']['Stable']['downloads']['chromedriver']
+        chrome_driver_objects = requests.get(self.chrome_driver_base_url2).json()
+        versions = chrome_driver_objects['versions']
+        versions.reverse()
+        versions = [v for v in versions if 'chromedriver' in v['downloads'] and v['version'].startswith(version)]
+        chromedriver_list = versions[0]['downloads']['chromedriver']
 
         # Handle special case for 'win' to match the provided JSON structure
         platform = "{}{}".format(self.os_name.lower(), self.bitness)
